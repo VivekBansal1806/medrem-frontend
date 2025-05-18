@@ -9,6 +9,7 @@ import {
   ActivityIndicator,
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { BACKEND_URL } from "./config";
 
 export default function MedicineReminderSelectScreen({ navigation }) {
   const [medicines, setMedicines] = useState([]);
@@ -19,7 +20,7 @@ export default function MedicineReminderSelectScreen({ navigation }) {
     try {
       const token = await AsyncStorage.getItem("token");
       const response = await fetch(
-        "http://192.168.0.152:8080/api/user-medicines/get/AllUserMedicinesNames",
+        `${BACKEND_URL}/user-medicines/get/AllUserMedicinesNames`,
         {
           headers: {
             Authorization: token ? `Bearer ${token}` : "",

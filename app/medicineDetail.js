@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import * as Animatable from "react-native-animatable";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { BACKEND_URL } from "./config";
 
 export default function MedicineDetailScreen({ route, navigation }) {
   const { medicine } = route.params;
@@ -20,7 +21,7 @@ export default function MedicineDetailScreen({ route, navigation }) {
     const fetchMedicineDetails = async () => {
       try {
         const response = await fetch(
-          `http://192.168.0.152:8080/api/medicines/get/${medicine.medicineId}`
+          `${BACKEND_URL}/medicines/get/${medicine.medicineId}`
         );
         if (response.ok) {
           const data = await response.json();
@@ -47,7 +48,7 @@ export default function MedicineDetailScreen({ route, navigation }) {
       }
 
       const response = await fetch(
-        `http://192.168.0.152:8080/api/user-medicines/add/${medicineDetails.medicineId}`,
+        `${BACKEND_URL}/user-medicines/add/${medicineDetails.medicineId}`,
         {
           method: "POST",
           headers: {

@@ -12,8 +12,9 @@ import {
 } from "react-native";
 import { useNavigation, CommonActions } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import {BACKEND_URL}from "./config";
 
-const BACKEND_URL = "http://192.168.0.104:8080/api/users/login";
+const LOGIN_URL = `${BACKEND_URL}/users/login`;
 
 export default function LoginScreen({ onLogin }) {
   const navigation = useNavigation();
@@ -39,7 +40,7 @@ export default function LoginScreen({ onLogin }) {
     if (!validateInputs()) return;
     setLoading(true);
     try {
-      const response = await fetch(BACKEND_URL, {
+      const response = await fetch(LOGIN_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

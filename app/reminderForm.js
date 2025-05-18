@@ -17,6 +17,7 @@ import {
   registerForPushNotificationsAsync,
 } from "./NotificationHelper";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { BACKEND_URL } from "./config";
 
 const FREQUENCIES = ["ONCE", "DAILY", "WEEKLY"];
 
@@ -33,7 +34,9 @@ const ReminderForm = () => {
   );
   const [message, setMessage] = useState(isEdit ? reminder.message : "");
   const [showTimePicker, setShowTimePicker] = useState(false);
-  const [frequency, setFrequency] = useState(isEdit ? reminder.frequency : "ONCE");
+  const [frequency, setFrequency] = useState(
+    isEdit ? reminder.frequency : "ONCE"
+  );
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -77,8 +80,8 @@ const ReminderForm = () => {
 
     try {
       const url = isEdit
-        ? `http://192.168.0.152:8080/api/reminders/update/${reminder.reminderId}`
-        : `http://192.168.0.152:8080/api/reminders/addReminder`;
+        ? `${BACKEND_URL}/reminders/update/${reminder.reminderId}`
+        : `${BACKEND_URL}/reminders/addReminder`;
 
       const method = isEdit ? "PUT" : "POST";
       const token = await AsyncStorage.getItem("token");
@@ -177,7 +180,11 @@ const ReminderForm = () => {
           disabled={loading || !message.trim()}
         >
           <Text style={styles.saveButtonText}>
-            {loading ? "Saving..." : isEdit ? "Update Reminder" : "Add Reminder"}
+            {loading
+              ? "Saving..."
+              : isEdit
+              ? "Update Reminder"
+              : "Add Reminder"}
           </Text>
         </TouchableOpacity>
       </ScrollView>

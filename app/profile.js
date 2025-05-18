@@ -12,6 +12,7 @@ import {
   ActivityIndicator,
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { BACKEND_URL } from "./config";
 
 const DEFAULT_PROFILE_PIC = "https://www.gravatar.com/avatar/?d=mp";
 
@@ -42,7 +43,7 @@ export default function ProfileScreen({ navigation }) {
         return;
       }
 
-      const response = await fetch(`http://192.168.0.152:8080/api/users/get`, {
+      const response = await fetch(`${BACKEND_URL}/users/get`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -101,7 +102,7 @@ export default function ProfileScreen({ navigation }) {
       }
 
       const response = await fetch(
-        `http://192.168.0.152:8080/api/users/update`,
+        `${BACKEND_URL}/users/update`,
         {
           method: "PUT",
           headers: {

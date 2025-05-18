@@ -14,6 +14,8 @@ import {
   View,
 } from "react-native";
 
+import { BACKEND_URL } from "./config";
+
 export default function UserMedicineDetail({ route }) {
   const { userMedicineId } = route.params;
   const [medicineData, setMedicineData] = useState(null);
@@ -74,7 +76,7 @@ export default function UserMedicineDetail({ route }) {
     try {
       const token = await AsyncStorage.getItem("token");
       const response = await fetch(
-        `http://192.168.0.152:8080/api/user-medicines/get/user-medicine-id/${userMedicineId}`,
+        `${BACKEND_URL}/user-medicines/get/user-medicine-id/${userMedicineId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -142,7 +144,7 @@ export default function UserMedicineDetail({ route }) {
     try {
       const token = await AsyncStorage.getItem("token");
       const response = await fetch(
-        "http://192.168.0.152:8080/api/user-medicines/updateQuantity",
+        `${BACKEND_URL}/user-medicines/updateQuantity`,
         {
           method: "PUT",
           headers: {
@@ -178,7 +180,7 @@ export default function UserMedicineDetail({ route }) {
     try {
       const token = await AsyncStorage.getItem("token");
       const response = await fetch(
-        `http://192.168.0.152:8080/api/user-medicines/delete/${userMedicineId}`,
+        `${BACKEND_URL}/user-medicines/delete/${userMedicineId}`,
         {
           method: "DELETE",
           headers: {

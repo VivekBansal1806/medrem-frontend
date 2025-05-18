@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, ActivityIndicator, Keyboard, TouchableWithoutFeedback } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { BACKEND_URL } from './config';
 
 export default function RegisterScreen() {
   const navigation = useNavigation();
@@ -15,7 +16,7 @@ export default function RegisterScreen() {
   const [successMessage, setSuccessMessage] = useState('');
   const [showPassword, setShowPassword] = useState(false);
 
-  const backendUrl = 'http://192.168.0.152:8080/api/users/register';
+  const backendUrl = `${BACKEND_URL}/users/register`;
 
   const validateInputs = () => {
     if (!username.trim()) {

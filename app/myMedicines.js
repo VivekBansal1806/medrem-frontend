@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { BACKEND_URL } from "./config";
 
 
 export default function MyMedicinesScreen({ navigation }) {
@@ -33,7 +34,7 @@ export default function MyMedicinesScreen({ navigation }) {
         return;
       }
       const response = await fetch(
-        "http://192.168.0.152:8080/api/user-medicines/getAllUserMedicines",
+        `${BACKEND_URL}/user-medicines/getAllUserMedicines`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

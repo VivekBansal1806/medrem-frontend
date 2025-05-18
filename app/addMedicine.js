@@ -12,6 +12,7 @@ import {
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Picker } from "@react-native-picker/picker";
+import { BACKEND_URL } from "./config";
 
 const medicineTypes = [
   "MEDICINE",
@@ -54,7 +55,7 @@ export default function AddMedicine({ navigation, route }) {
       const token = await AsyncStorage.getItem("token");
 
       const response = await fetch(
-        "http://192.168.0.152:8080/api/user-medicines/add-new",
+        `${BACKEND_URL}/user-medicines/add-new`,
         {
           method: "POST",
           headers: {

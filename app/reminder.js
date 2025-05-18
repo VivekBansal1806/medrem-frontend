@@ -11,6 +11,7 @@ import {
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Checkbox } from "react-native-paper";
+import { BACKEND_URL } from "./config";
 
 export default function ReminderScreen({ navigation }) {
   const [reminders, setReminders] = useState([]);
@@ -24,7 +25,7 @@ export default function ReminderScreen({ navigation }) {
     try {
       const token = await AsyncStorage.getItem("token");
       const response = await fetch(
-        "http://192.168.0.152:8080/api/reminders/getAll",
+        `${BACKEND_URL}/reminders/getAll`,
         {
           headers: {
             Authorization: token ? `Bearer ${token}` : "",
@@ -74,7 +75,7 @@ export default function ReminderScreen({ navigation }) {
             try {
               const token = await AsyncStorage.getItem("token");
               const response = await fetch(
-                `http://192.168.0.152:8080/api/reminders/delete/reminderId/${reminderId}`,
+                `${BACKEND_URL}/reminders/delete/reminderId/${reminderId}`,
                 {
                   method: "DELETE",
                   headers: {
@@ -107,7 +108,7 @@ export default function ReminderScreen({ navigation }) {
       const token = await AsyncStorage.getItem("token");
       const pillsTaken = 1;
       const response = await fetch(
-        `http://192.168.0.152:8080/api/user-medicines/take/${userMedicineId}?pillsTaken=${pillsTaken}`,
+        `${BACKEND_URL}/user-medicines/take/${userMedicineId}?pillsTaken=${pillsTaken}`,
         {
           method: "POST",
           headers: {

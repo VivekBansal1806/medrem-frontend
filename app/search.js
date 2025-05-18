@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { BACKEND_URL } from "./config";
 
 export default function MedicineSearchScreen({ navigation }) {
   const [searchTerm, setSearchTerm] = useState("");
@@ -35,7 +36,7 @@ export default function MedicineSearchScreen({ navigation }) {
     setLoading(true);
     try {
       const response = await fetch(
-        `http://192.168.0.152:8080/api/medicines/search?name=${encodeURIComponent(
+        `${BACKEND_URL}/medicines/search?name=${encodeURIComponent(
           term
         )}`
       );
